@@ -1,0 +1,15 @@
+{
+	"name": "xbstrap-maintainer-utilities",
+	"version": "0.0.1",
+	"license":"MIT",
+	"author": "no92 <leo@managarm.org> (https://github.com/no92)",
+	"repository": "github:managarm/xbstrap-maintainer-utilities",
+	"bin": {
+		"xmu": "./xmu.js"
+	},
+	"dependencies": {
+		"ansi-colors": "latest",
+		"glob": "latest",
+		"yaml": "latest"
+	}
+}
