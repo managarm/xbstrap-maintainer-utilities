@@ -65,7 +65,13 @@ var maintainers_summary = {}
 var missing_maintainers_summary = []
 var total_pkgs = 0
 
-if(args.values.help || !args.values.length) {
+let has_options = false
+
+Object.keys(args.values).forEach(function(k, i) {
+	has_options |= args.values[k]
+})
+
+if(args.values.help || !has_options) {
 	console.log("Usage: node xmu.js [OPTION] [PATH]")
 
 	const max_len = Math.max(...(Object.keys(options).map(el => el.length))) + 7;
