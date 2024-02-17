@@ -65,7 +65,9 @@ var maintainers_summary = {}
 var missing_maintainers_summary = []
 var total_pkgs = 0
 
-if(args.values.help) {
+if(args.values.help || !args.values.length) {
+	console.log("Usage: node xmu.js [OPTION] [PATH]")
+
 	const max_len = Math.max(...(Object.keys(options).map(el => el.length))) + 7;
 
 	for([n, params] of Object.entries(options)) {
@@ -78,6 +80,8 @@ if(args.values.help) {
 		}
 		console.log(str)
 	}
+
+	process.exit(0)
 }
 
 if(args.positionals.length && !fs.existsSync(args.positionals[0])) {
