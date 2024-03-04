@@ -29,7 +29,7 @@ const options = {
 	},
 	'by-file': {
 		type: 'boolean',
-		short: 'f',
+		short: 'F',
 		default: false,
 		description: "Split statistics by file"
 	},
