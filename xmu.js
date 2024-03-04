@@ -44,6 +44,12 @@ const options = {
 		short: 'M',
 		default: false,
 		description: "List packages that don't have a maintainer"
+	},
+	'lint': {
+		type: 'boolean',
+		short: 'l',
+		default: false,
+		description: "Lint the bootstrap files"
 	}
 }
 
@@ -196,5 +202,28 @@ function handle_file(path) {
 		}
 
 		total_pkgs += Object.keys(pkgs.items).length
+	}
+
+	if(args.values.lint) {
+		pkgs = doc.contents.get('packages')
+
+		f = Object.entries(pkgs).filter((p) => {
+			return p[0] == "items"
+		}).map((m) => {
+			return m[1];
+		}).flat(1);
+
+		for(i of f) {
+			if(i.has('configure')) {
+				configure_steps = i.getIn(['configure']);
+
+				for(num = 0; configure_steps.has(num); num++) {
+					arg_list = configure_steps.getIn([num, 'args']);
+					if(arg_list instanceof yaml.YAMLSeq && arg_list.has(1) && arg_list.get(0) == 'meson' && arg_list.get(1) != 'setup') {
+						console.log(c.yellow(i.get('name')) + ": meson is invoked without `setup`");
+					}
+				}
+			}
+		}
 	}
 }
