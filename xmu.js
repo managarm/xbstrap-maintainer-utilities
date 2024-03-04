@@ -194,7 +194,7 @@ function handle_file(path) {
 		} else {
 			missing_maintainers_summary = missing_maintainers_summary.concat(missing)
 		}
-	}
 
-	total_pkgs += Object.keys(pkgs.items).length
+		total_pkgs += Object.keys(pkgs.items).length
+	}
 }
